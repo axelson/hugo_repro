@@ -6,6 +6,45 @@
       {{ .Title }}
     </title>
     <meta name="description" content="{{ .Description }}">
+
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+    {{ hugo.Generator }}
+    {{/* NOTE: For Production make sure you add `HUGO_ENV="production"` before your build command */}}
+    {{ $production := eq (getenv "HUGO_ENV") "production" | or (eq site.Params.env "production") }}
+    {{ $public := not .Params.private }}
+    {{ if and $production $public }}
+      <meta name="robots" content="index, follow">
+    {{ else }}
+      <meta name="robots" content="noindex, nofollow">
+    {{ end }}
+    {{ with .Params.author | default .Site.Params.author }}
+      <meta name="author" content = "
+        {{- if reflect.IsSlice . -}}
+          {{ delimit . ", " | plainify }}
+        {{- else -}}
+          {{ . | plainify }}
+        {{- end -}}
+      ">
+    {{ end }}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {{ if eq hugo.Environment "development" }}
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/738108/6492832/css/fonts.css" />
+    {{ end }}
+
+    {{ if eq hugo.Environment "production" }}
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/738108/6032552/css/fonts.css" />
+    {{ end }}
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
     {{/* styles */}}
     {{ $options := dict "inlineImports" true }}
     {{ $styles := resources.Get "css/styles.css" }}
@@ -15,8 +54,42 @@
     {{ end }}
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
   </head>
-  <body class="my-10">
-    <div class="container px-4 lg:mx-auto">
+  <body class="">
+
+    {{ $currentPage := . }}
+    <div class="nav-bg text-white">
+      <nav class="main-nav container p-5">
+        <div class="sm:flex justify-between items-center">
+          <div class="">
+            <a class="inline-block navigation-logo" href="{{ .Site.Home.RelPermalink }}">
+              {{ $logo := resources.Get "images/JA_logotype.svg" }}
+              {{ if $logo }}
+                <img src="{{ $logo.RelPermalink }}" alt="Logo">
+              {{ end }}
+            </a>
+          </div>
+          <ul class="flex items-center">
+            <li>
+              <a href="/projects" class="gotham-medium uppercase inline-block p-3">
+                <div class="navigation-link{{ if eq $currentPage.Section "projects" }} active{{ end }}">
+                  Projects
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="/contact" class="gotham-medium uppercase inline-block p-3">
+                <div class="navigation-link{{ if eq $currentPage.Section "contact" }} active{{ end }}">
+                  Contact
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!-- <div class="container px-4 lg:mx-auto"> -->
+    <div class="container my-4">
       {{ block "main" . }}{{ end }}
     </div>
   </body>

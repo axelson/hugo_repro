@@ -4,7 +4,7 @@
 
 @import "components/all.css";
 
-html {
+/*html {
     font-size: 14px;
 }
 
@@ -12,4 +12,108 @@ html {
     html {
         font-size: 16px;
     }
+}*/
+
+.gotham-medium {
+  font-family: "Gotham A", "Gotham B";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.gotham-bold {
+  font-family: "Gotham A", "Gotham B";
+  font-style: normal;
+  font-weight: 700;
+}
+
+.gotham-narrow-light {
+  font-family: "Gotham Narrow SSm A", "Gotham Narrow SSm B";
+  font-style: normal;
+  font-weight: 300;
+}
+
+.gotham-narrow-light-italic {
+  font-family: "Gotham Narrow SSm A", "Gotham Narrow SSm B";
+  font-style: italic;
+  font-weight: 300;
+}
+
+.gotham-narrow-bold {
+  font-family: "Gotham Narrow SSm A", "Gotham Narrow SSm B";
+  font-style: normal;
+  font-weight: 700;
+}
+
+.project-title {
+  font-size: 1.1em;
+}
+
+body {
+  font-size: 0.8em;
+  font-family: "Gotham Narrow SSm A", "Gotham Narrow SSm B";
+  font-style: normal;
+  font-weight: 300;
+}
+
+a {
+  color: black;
+  text-decoration: underline;
+}
+
+.main-nav a {
+  color: white;
+}
+
+.project-subtext {
+  font-size: 0.9em;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+nav.main-nav li a {
+  text-decoration: none;
+}
+
+nav.main-nav li a div {
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+nav.main-nav li a div:hover {
+  border-bottom-color: #5e908a;  /* darken(#7baaa3, 10%) */
+}
+
+nav.main-nav .active {
+  border-bottom-color: #7baaa3;
+}
+
+.navigation-logo {
+  width: 275px;
+}
+
+.nav-bg {
+  background: #414042;
+}
+
+.navigation-link {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+
+/* Particles visualization */
+.visualization.particle svg { 
+  fill: white; 
+}
+
+.visualization.particle rect { 
+  fill: none; 
+  pointer-events: all; 
+}
+
+.visualization.particle circle { 
+  fill: none; 
+  stroke-width: 1.5px; 
+  stroke: black; 
 }
