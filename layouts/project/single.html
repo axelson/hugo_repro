@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article>
+    <h1>{{ .Title }}</h1>
+    <div class="project-content">
+        {{ .Content }}
+    </div>
+    {{ with .Params.project_url }}
+    <div class="project-url">
+        <a href="{{ . }}">Project Link</a>
+    </div>
+    {{ end }}
+</article>
+{{ end }}
